@@ -1,0 +1,30 @@
+<!--miniprogram/pages/postList/postlist.wxml-->
+<view class="container">
+  <view class='page-body'>
+
+    <view wx:for="{{list}}" wx:key="id">
+      <view class="postCardContainer">
+        <view>
+          <image class="postCardAvatar" lazy-load="true" src="{{item.userInfo.avatarUrl}}"></image>
+        </view>
+
+        <view class="postCardInfoListContainer">
+          <text class="postName">{{item.userInfo.nickName}}</text>
+          <text>{{item.message}}</text>
+          <image-grid-view imageListProps="{{item.imageFileIDList}}" />
+          <text>{{item.dateStr}}</text>
+        </view>
+      </view>
+    </view>
+
+  </view>
+</view>
+
+<block wx:if="{{hasPermissionToPost}}">
+  <view class="sendBox">
+    <view style="flex-grow:1" />
+    <navigator url='../postSend/postsend'>
+      <image class="sendBtn" src="../../images/addition_fill.png" />
+    </navigator>
+  </view>
+</block>

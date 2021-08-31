@@ -1,0 +1,8 @@
+<!--components/imageGridView/index.wxml-->
+<view class="gridImageContainer">
+  <block wx:for="{{imageList}}" wx:for-item="imageUrl" wx:key="imageUrl">
+    <view class="gridImageItem">
+      <image lazy-load="true" mode="aspectFill" src="{{imageUrl}}" data-src="{{imageUrl}}" bindtap="previewImage"></image>
+    </view>
+  </block>
+</view>

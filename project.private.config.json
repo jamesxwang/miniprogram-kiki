@@ -1,0 +1,36 @@
+{
+  "setting": {},
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "id": -1,
+          "name": "index",
+          "pathName": "pages/memory/index",
+          "query": ""
+        },
+        {
+          "name": "pages/postList/postlist",
+          "pathName": "pages/postList/postlist",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/postSend/postsend",
+          "pathName": "pages/postSend/postsend",
+          "query": "",
+          "scene": null
+        }
+      ]
+    }
+  }
+}

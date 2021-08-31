@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "image-grid-view": "../../components/imageGridView"
+  },
+  "navigationBarTitleText": "笔记本",
+  "enablePullDownRefresh": true
+}

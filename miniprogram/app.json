@@ -1,0 +1,42 @@
+{
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#FF1F71",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/memory/index",
+        "iconPath": "images/icon_await_disable.png",
+        "selectedIconPath": "images/icon_await_enable.png",
+        "text": "轨迹"
+      },
+      {
+        "pagePath": "pages/postList/postlist",
+        "iconPath": "images/icon_love_disable.png",
+        "selectedIconPath": "images/icon_love_enable.png",
+        "text": "笔记本"
+      }
+    ]
+  },
+  "pages": [
+    "pages/memory/index",
+    "pages/postList/postlist",
+    "pages/postSend/postsend"
+  ],
+  "window": {
+    "backgroundColor": "#F8F8F8",
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "navigationBarTitleText": "Kiki 专属小程序",
+    "navigationBarTextStyle": "black"
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "connectSocket": 10000,
+    "uploadFile": 10000,
+    "downloadFile": 10000
+  },
+  "sitemapLocation": "sitemap.json",
+  "style": "v2"
+}
