@@ -1,4 +1,6 @@
 <!--miniprogram/pages/postList/postlist.wxml-->
+<get-user-info wx:if="{{!hasUserInfo}}" bind:onGetUserProfileFinish="onGetUserProfileFinish"></get-user-info>
+
 <view class="container">
   <view class='page-body'>
 

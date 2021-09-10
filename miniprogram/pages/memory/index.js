@@ -1,6 +1,7 @@
 // miniprogram/pages/memory/index.js
 const db = wx.cloud.database()
 const anniversary = db.collection('anniversary')
+const { getUserInfoAndPermission } = require('../../utils/index');
 
 Page({
 
@@ -8,6 +9,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    hasUserInfo: false,
     totalDay: 0,
     list: [
       { id: 99, desc: "99天" },
@@ -23,10 +25,15 @@ Page({
     ],
   },
 
+  onGetUserProfileFinish: function (e) {
+    const { userInfo } = e.detail
+    this.setData({ hasUserInfo: !!userInfo })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: async function (options) {
 
   },
 
@@ -41,6 +48,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: async function () {
+    const { userInfo } = await getUserInfoAndPermission()
+    this.setData({
+      hasUserInfo: (!!userInfo && Object.keys(userInfo).length),
+    })
+
     const { data } = await anniversary.get()
     const [firstRecord] = data
     const startSecond = new Date(firstRecord.loveBegin).getTime() / 1000

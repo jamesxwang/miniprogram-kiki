@@ -1,7 +1,7 @@
 // miniprogram/pages/postSend/postsend.js
 const db = wx.cloud.database()
 const postCollection = db.collection('post')
-const { formatDateStr } = require('../../utils/format.js');
+const { formatDateStr } = require('../../utils/index');
 const sourceType = [
   ['camera'],
   ['album'],

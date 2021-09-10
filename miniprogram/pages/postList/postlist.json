@@ -1,5 +1,6 @@
 {
   "usingComponents": {
+    "get-user-info": "../../components/getUserProfileButton",
     "image-grid-view": "../../components/imageGridView"
   },
   "navigationBarTitleText": "笔记本",
