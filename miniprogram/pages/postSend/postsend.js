@@ -1,7 +1,8 @@
 // miniprogram/pages/postSend/postsend.js
 const db = wx.cloud.database()
 const postCollection = db.collection('post')
-const { formatDateStr } = require('../../utils/index');
+const { formatDateStr, getUserInfoAndPermission } = require('../../utils/index')
+
 const sourceType = [
   ['camera'],
   ['album'],
@@ -20,7 +21,6 @@ Page({
    */
   data: {
     userInfo: {},
-    hasUserInfo: false,
     inputValue: '',
     imageList: [],
     sourceTypeIndex: 2,
@@ -133,16 +133,8 @@ Page({
       })
       return
     }
-    if (!this.data.hasUserInfo || Object.keys(this.data.userInfo) === 0) {
-      const { userInfo } = await wx.getUserProfile({
-        desc: '用于获取用户昵称和头像', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
-      })
-      this.setData({
-        userInfo,
-        hasUserInfo: true
-      })
-    }
-    console.log('userInfo',this.data)
+    const { userInfo } = await getUserInfoAndPermission()
+    this.setData({ userInfo })
     this.uploadImg()
   },
 
