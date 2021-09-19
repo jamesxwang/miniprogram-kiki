@@ -1,47 +1,38 @@
 // miniprogram/pages/postList/postlist.js
-const app = getApp()
 const db = wx.cloud.database()
 const postCollection = db.collection('post')
+const { formatDateStr, getUserInfoAndPermission } = require('../../utils/index');
+
 const MAX_LIMIT = 6
 const FIRST_PAGE = 0
-const { formatDateStr } = require('../../utils/format');
-const { adminOpenIds } = require('../../config')
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    hasUserInfo: false,
     hasPermissionToPost: false,
     page: FIRST_PAGE,
     totalCount: 0,
     list: null
   },
 
+  onGetUserProfileFinish: function (e) {
+    const { userInfo, hasPermission } = e.detail
+    
+    this.setData({
+      hasUserInfo: !!userInfo,
+      hasPermissionToPost: hasPermission,
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: async function (options) {
-    if (!app.globalData.openId) {
-      try {
-        wx.showLoading({
-          title: 'loading...',
-        })
-        const { result: { openid } } = await wx.cloud.callFunction({
-          name: 'quickstartFunctions',
-          data: {
-            type: 'getOpenId'
-          }
-        })
 
-        // 存入 globalData
-        app.globalData.openId = openid
-        wx.hideLoading()
-      } catch (error) {
-        wx.hideLoading()
-      }
-    }
-    this.checkPostPermission()
   },
 
   /**
@@ -55,6 +46,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: async function () {
+    const { userInfo, hasPermission } = await getUserInfoAndPermission()
+    this.setData({
+      hasPermissionToPost: hasPermission,
+      hasUserInfo: (!!userInfo && Object.keys(userInfo).length),
+    })
+
     if (this.data.list !== null) {
       return
    }
@@ -112,14 +109,6 @@ Page({
     return {
       title: 'Kiki 专属小程序 - 笔记本',
       path: 'pages/postList/postlist'
-    }
-  },
-
-  checkPostPermission: function () {
-    if (adminOpenIds.includes(app.globalData.openId)) {
-      this.setData({
-        hasPermissionToPost: true,
-      })
     }
   },
 
