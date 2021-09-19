@@ -50,7 +50,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    const eventChannel = this.getOpenerEventChannel()
+    this.setData({ eventChannel })
   },
 
   /**
@@ -157,18 +158,24 @@ Page({
         title: 'saving...',
       })
 
+      const newPost = {
+        userInfo: this.data.userInfo,
+        message: this.data.inputValue,
+        imageFileIDList: resList.map(({ fileID }) => fileID),
+        isDeleted: false,
+        createTime: db.serverDate()
+      }
+
       await postCollection.add({
-        data: {
-          userInfo: this.data.userInfo,
-          message: this.data.inputValue,
-          imageFileIDList: resList.map(({ fileID }) => fileID),
-          isDeleted: false,
-          createTime: db.serverDate()
-        }
+        data: newPost
       })
 
       wx.hideLoading()
-      wx.navigateBack()
+      wx.navigateBack({
+        complete: () => {
+          this.data.eventChannel.emit('onPostComplete', { newPost })
+        }
+      })
     } catch (error) {
       console.log(error)
       wx.hideLoading()
