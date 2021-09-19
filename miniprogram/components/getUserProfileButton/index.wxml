@@ -1,0 +1,2 @@
+<!--components/getUserProfileButton/index.wxml-->
+<view class="getUserProfileButton" bindtap="getUserProfile"></view>

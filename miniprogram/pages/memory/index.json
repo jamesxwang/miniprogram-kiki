@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "get-user-info": "../../components/getUserProfileButton"
+  },
   "navigationBarTitleText": "Kiki 专属小程序"
 }
