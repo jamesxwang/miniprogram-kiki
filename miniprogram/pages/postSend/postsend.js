@@ -1,7 +1,8 @@
 // miniprogram/pages/postSend/postsend.js
 const db = wx.cloud.database()
 const postCollection = db.collection('post')
-const { formatDateStr } = require('../../utils/index');
+const { formatDateStr, getUserInfoAndPermission } = require('../../utils/index')
+
 const sourceType = [
   ['camera'],
   ['album'],
@@ -20,7 +21,6 @@ Page({
    */
   data: {
     userInfo: {},
-    hasUserInfo: false,
     inputValue: '',
     imageList: [],
     sourceTypeIndex: 2,
@@ -50,7 +50,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    const eventChannel = this.getOpenerEventChannel()
+    this.setData({ eventChannel })
   },
 
   /**
@@ -133,16 +134,8 @@ Page({
       })
       return
     }
-    if (!this.data.hasUserInfo || Object.keys(this.data.userInfo) === 0) {
-      const { userInfo } = await wx.getUserProfile({
-        desc: '用于获取用户昵称和头像', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
-      })
-      this.setData({
-        userInfo,
-        hasUserInfo: true
-      })
-    }
-    console.log('userInfo',this.data)
+    const { userInfo } = await getUserInfoAndPermission()
+    this.setData({ userInfo })
     this.uploadImg()
   },
 
@@ -165,18 +158,24 @@ Page({
         title: 'saving...',
       })
 
+      const newPost = {
+        userInfo: this.data.userInfo,
+        message: this.data.inputValue,
+        imageFileIDList: resList.map(({ fileID }) => fileID),
+        isDeleted: false,
+        createTime: db.serverDate()
+      }
+
       await postCollection.add({
-        data: {
-          userInfo: this.data.userInfo,
-          message: this.data.inputValue,
-          imageFileIDList: resList.map(({ fileID }) => fileID),
-          isDeleted: false,
-          createTime: db.serverDate()
-        }
+        data: newPost
       })
 
       wx.hideLoading()
-      wx.navigateBack()
+      wx.navigateBack({
+        complete: () => {
+          this.data.eventChannel.emit('onPostComplete', { newPost })
+        }
+      })
     } catch (error) {
       console.log(error)
       wx.hideLoading()

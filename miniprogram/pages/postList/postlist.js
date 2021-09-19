@@ -1,7 +1,7 @@
 // miniprogram/pages/postList/postlist.js
 const db = wx.cloud.database()
 const postCollection = db.collection('post')
-const { formatDateStr, getUserInfoAndPermission } = require('../../utils/index');
+const { formatDateStr, getUserInfoAndPermission } = require('../../utils/index')
 
 const MAX_LIMIT = 6
 const FIRST_PAGE = 0
@@ -110,6 +110,24 @@ Page({
       title: 'Kiki 专属小程序 - 笔记本',
       path: 'pages/postList/postlist'
     }
+  },
+
+  onTapPlusBtn: function () {
+    wx.navigateTo({
+      url: '../postSend/postsend',
+      events: {
+        onPostComplete: ({ newPost }) => {
+          const newList = this.data.list
+          newList.unshift({
+            ...newPost,
+            dateStr: '刚刚',
+          });
+          this.setData({
+            list: newList
+          })
+        }
+      }
+    })
   },
 
   loadData: async function () {

@@ -25,8 +25,8 @@
 <block wx:if="{{hasPermissionToPost}}">
   <view class="sendBox">
     <view style="flex-grow:1" />
-    <navigator url='../postSend/postsend'>
+    <view bindtap="onTapPlusBtn">
       <image class="sendBtn" src="../../images/addition_fill.png" />
-    </navigator>
+    </view>
   </view>
 </block>
