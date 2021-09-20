@@ -2,7 +2,7 @@
 
 ## 微信扫码体验
 
-![](./code.png)
+![](https://cdn.jsdelivr.net/gh/jamesxwang/kiki@master/code.png)
 
 ## 项目结构
 
