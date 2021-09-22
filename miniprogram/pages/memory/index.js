@@ -1,7 +1,7 @@
 // miniprogram/pages/memory/index.js
 const db = wx.cloud.database()
 const anniversary = db.collection('anniversary')
-const { getUserInfoAndPermission } = require('../../utils/index');
+const { getUserInfoAndPermission } = require('../../utils/auth');
 
 Page({
 

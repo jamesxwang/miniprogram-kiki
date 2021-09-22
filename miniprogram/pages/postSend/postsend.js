@@ -1,7 +1,8 @@
 // miniprogram/pages/postSend/postsend.js
 const db = wx.cloud.database()
 const postCollection = db.collection('post')
-const { formatDateStr, getUserInfoAndPermission } = require('../../utils/index')
+const { getUserInfoAndPermission } = require('../../utils/auth')
+const { formatDateStr } = require('../../utils/format')
 
 const sourceType = [
   ['camera'],
