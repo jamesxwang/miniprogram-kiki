@@ -1,4 +1,11 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "mp-form": "weui-miniprogram/form/form",
+    "mp-cells": "weui-miniprogram/cells/cells",
+    "mp-cell": "weui-miniprogram/cell/cell",
+    "mp-uploader": "weui-miniprogram/uploader/uploader",
+    "mp-loading": "weui-miniprogram/loading/loading",
+    "mp-toptips": "weui-miniprogram/toptips/toptips"
+  },
   "navigationBarTitleText": "Kiki 专属小程序"
 }

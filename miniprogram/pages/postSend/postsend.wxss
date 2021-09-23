@@ -1,7 +1,8 @@
 /* miniprogram/pages/postSend/postsend.wxss */
-@import "../../lib/weui.wxss";
+.page-body {
+  width: 90%;
+}
 
-
-.sendBtn {
+.send-btn {
   margin: 50rpx 30rpx;
 }

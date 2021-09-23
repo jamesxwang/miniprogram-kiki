@@ -31,6 +31,9 @@
     "navigationBarTitleText": "Kiki 专属小程序",
     "navigationBarTextStyle": "black"
   },
+  "useExtendedLib": {
+    "weui": true
+  },
   "networkTimeout": {
     "request": 10000,
     "connectSocket": 10000,

@@ -1,2 +1,2 @@
 <!--components/getUserProfileButton/index.wxml-->
-<view class="getUserProfileButton" bindtap="getUserProfile"></view>
+<view class="getUserProfileButton" bindtap="throttledGetUserProfile"></view>
