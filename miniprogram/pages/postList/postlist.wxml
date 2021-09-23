@@ -1,20 +1,22 @@
 <!--miniprogram/pages/postList/postlist.wxml-->
-<get-user-info wx:if="{{!hasUserInfo}}" bind:onGetUserProfileFinish="onGetUserProfileFinish"></get-user-info>
+<get-user-info wx:if="{{!hasUserInfo}}" bind:onGetUserProfileFinish="onGetUserProfileFinish" />
 
 <view class="container">
   <view class='page-body'>
 
     <view wx:for="{{list}}" wx:key="id">
-      <view class="postCardContainer">
+      <view class="post-card-container">
         <view>
-          <image class="postCardAvatar" lazy-load="true" src="{{item.userInfo.avatarUrl}}"></image>
+          <image class="post-card-avatar" lazy-load="true" src="{{item.userInfo.avatarUrl}}" />
         </view>
 
-        <view class="postCardInfoListContainer">
-          <text class="postName">{{item.userInfo.nickName}}</text>
+        <view class="post-card-info-list-container">
+          <text class="post-username">{{item.userInfo.nickName}}</text>
           <text>{{item.message}}</text>
           <image-grid-view imageListProps="{{item.imageFileIDList}}" />
-          <text>{{item.dateStr}}</text>
+          <view class="post-ext-container">
+            <text class="post-datetime">{{item.dateStr}}</text>
+          </view>
         </view>
       </view>
     </view>
@@ -23,10 +25,10 @@
 </view>
 
 <block wx:if="{{hasPermissionToPost}}">
-  <view class="sendBox">
+  <view class="send-box">
     <view style="flex-grow:1" />
-    <navigator url='../postSend/postsend'>
-      <image class="sendBtn" src="../../images/addition_fill.png" />
-    </navigator>
+    <view bindtap="onTapPlusBtn">
+      <image class="send-btn" src="../../images/addition_fill.png" />
+    </view>
   </view>
 </block>

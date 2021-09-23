@@ -1,37 +1,39 @@
 /* miniprogram/pages/postList/postlist.wxss */
-@import "../../lib/weui.wxss";
-
-.postCardContainer {
+.post-card-container {
   display: flex;
   flex-direction: row;
   margin: 0rpx 20rpx 30rpx 20rpx;
 }
 
-.postCardInfoListContainer {
+.post-card-container .post-card-avatar {
+  height: 80rpx;
+  width: 80rpx;
+  border-radius: 50%;
+}
+
+.post-card-info-list-container {
   display: flex;
   flex-grow: 1;
   flex-direction: column;
   margin: 0rpx 50rpx 50rpx 20rpx;
 }
 
-.postCardAvatar {
-  height: 80rpx;
-  width: 80rpx;
-  border-radius: 50%;
-}
-
-.postName {
+.post-card-info-list-container .post-username {
   font-size: 30rpx;
   color: #307691;
 }
 
-.postImage {
-  height: 550rpx;
-  width: 550rpx;
-  border-radius: 5rpx;
+.post-card-info-list-container .post-ext-container {
+  margin-top: 10rpx;
 }
 
-.sendBox {
+.post-card-info-list-container .post-ext-container .post-datetime {
+  font-size: 30rpx;
+  color: #9ca0a1;
+}
+
+/* 发布按钮 （仅管理员可见） */
+.send-box {
   position:fixed;
   bottom:0;
   display:flex;
@@ -39,7 +41,7 @@
   justify-content:center;
 }
 
-.sendBtn {
+.send-box .send-btn {
   width: 120rpx;
   height: 120rpx;
 }

@@ -1,7 +1,7 @@
 // miniprogram/pages/memory/index.js
 const db = wx.cloud.database()
 const anniversary = db.collection('anniversary')
-const { getUserInfoAndPermission } = require('../../utils/index');
+const { getUserInfoAndPermission } = require('../../utils/auth');
 
 Page({
 
@@ -19,6 +19,7 @@ Page({
       { id: 1095, desc: "3年" },
       { id: 1314, desc: "1314天" },
       { id: 2920, desc: "8年" },
+      { id: 3000, desc: "3000天" },
       { id: 3285, desc: "9年" },
       { id: 36135, desc: "99年" },
       { id: 3650000, desc: "10000年" },
