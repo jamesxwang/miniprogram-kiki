@@ -1,5 +1,7 @@
 <!--miniprogram/pages/postSend/postsend.wxml-->
-<view class="container">
+<get-user-info wx:if="{{!hasUserInfo}}" bind:onGetUserProfileFinish="onGetUserProfileFinish" />
+
+<view wx:if="{{hasPermissionToPost}}" class="container">
   <view class="page-body">
       <view class="page-section">
         <mp-cells title="想记录的时刻">
@@ -47,6 +49,15 @@
         <button bindtap="uploadImgWithUserProfile" type="primary" class="send-btn" loading="{{loading}}"> 发布 </button>
       </view>
   </view>
+</view>
+<view wx:else class="container">
+  <view class="weui-msg">
+		<view class="weui-msg__icon-area"><text class="weui-icon-warn weui-icon_msg"></text></view>
+		<view class="weui-msg__text-area">
+			<view class="weui-msg__title">发布页面下线通知</view>
+			<view class="weui-msg__desc">因个人小程序未开放信息发布平台的功能，此页面进行下线处理。</view>
+		</view>
+	</view>
 </view>
 <mp-loading show="{{showLoading}}" tips="{{loadingTips}}" type="circle" />
 <mp-toptips msg="{{error}}" type="error" show="{{error}}" />

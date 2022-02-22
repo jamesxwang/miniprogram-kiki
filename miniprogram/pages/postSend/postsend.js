@@ -21,6 +21,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    hasUserInfo: false,
+    hasPermissionToPost: false,
     userInfo: {},
     inputValue: '',
     sourceType: SOURCE_TYPE[2],
@@ -39,6 +41,15 @@ Page({
   onLoad: function (options) {
     this.setData({
       chooseImage: this.chooseImage.bind(this),
+    })
+  },
+
+  onGetUserProfileFinish: function (e) {
+    const { userInfo, hasPermission } = e.detail
+    
+    this.setData({
+      hasUserInfo: !!userInfo,
+      hasPermissionToPost: hasPermission,
     })
   },
 
