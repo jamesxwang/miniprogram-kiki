@@ -28,7 +28,9 @@ Page({
     count: 9,
     files: [],
     showLoading: false,
-    loadingTips: '加载中...'
+    loadingTips: '加载中...',
+    date: '2022-01-01',
+    time: '00:00',
   },
 
   /**
@@ -38,6 +40,17 @@ Page({
     this.setData({
       chooseImage: this.chooseImage.bind(this),
     })
+  },
+
+  bindDateChange(e) {
+    this.setData({
+      date: e.detail.value,
+    });
+  },
+  bindTimeChange(e) {
+    this.setData({
+      time: e.detail.value,
+    });
   },
 
   chooseImage: function (e) {
@@ -71,19 +84,26 @@ Page({
       })
       return
     }
-    const { userInfo } = await getUserInfoAndPermission()
-    this.setData({ userInfo })
-    this.uploadImg()
+    try {
+      const { userInfo } = await getUserInfoAndPermission()
+      this.setData({ userInfo })
+      this.uploadImg()
+    } catch (error) {
+      this.setData({
+        error,
+        showLoading: false,
+      })
+    }
   },
 
   uploadImg: async function() {
-    const now = new Date()
-    this.setData({
-      showLoading: true,
-      loadingTips: '上传图片中...'
-    })
-
     try {
+      const now = new Date(`${this.data.date} ${this.data.time}`);
+      this.setData({
+        showLoading: true,
+        loadingTips: '上传图片中...'
+      })
+
       const resList = await Promise.all(this.data.files.map((image, index) => {
         const filename = `${formatDateStr(now, 'yyyy-MM-dd-hh-mm-ss')}-${index}.png`
         return wx.cloud.uploadFile({
@@ -101,9 +121,11 @@ Page({
         message: this.data.inputValue,
         imageFileIDList: resList.map(({ fileID }) => fileID),
         isDeleted: false,
-        createTime: db.serverDate()
+        createTime: db.serverDate({
+          offset: now.getTime() - new Date().getTime()
+        })
       }
-
+      // console.log({ newPost })
       await postCollection.add({
         data: newPost
       })

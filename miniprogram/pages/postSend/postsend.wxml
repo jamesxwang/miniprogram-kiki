@@ -6,6 +6,27 @@
           <mp-cell>
             <input class="weui-input" maxlength="99" auto-focus placeholder="最大输入长度为99" bindinput="bindKeyInput" />
           </mp-cell>
+          <view class="weui-cell weui-cell_active">
+            <view class="weui-cell__hd">
+              <view class="weui-label" id="js_date" aria-hidden="true">日期</view>
+            </view>
+            <view class="weui-cell__bd">
+              <picker mode="date" aria-role="combobox" aria-labelledby="js_date" value="{{date}}" start="1995-01-01" bindchange="bindDateChange">
+                <view class="weui-input">{{date}}</view>
+              </picker>
+            </view>
+          </view>
+          <view class="weui-cell weui-cell_active">
+            <view class="weui-cell__hd">
+              <view class="weui-label" aria-hidden="true" id="js_time">时间</view>
+            </view>
+            <view class="weui-cell__bd">
+              <picker aria-role="combobox" aria-labelledby="js_time" mode="time" value="{{time}}" bindchange="bindTimeChange">
+                <view class="weui-input">{{time}}</view>
+              </picker>
+            </view>
+          </view>
+
           <mp-cell>
             <mp-uploader
               delete
